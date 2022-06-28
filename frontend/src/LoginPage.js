@@ -1,18 +1,14 @@
 import './css/LoginPage.css';
-import {useState} from "react";
-
-export default function RegisterPage() {
-    const [username, setUsername] = useState("");
-    const check_username_is_exist = (event) => {
-        setUsername(event.target.value);
-        fetch(`http://localhost:3000/username/${event.target.value}`)
-            .then(response => {
-                if (response.status===404){
-                    document.querySelector('.username').classList.remove('d-none');
-                }else{
-                    document.querySelector('.username').classList.add('d-none');
-                }
-            })
+import {Link} from 'react-router-dom';
+export default function LoginPage() {
+    const togglePassword = (event) => {
+        const checkboxState = event.target.checked;
+        const element = document.querySelector('#password');
+        if (checkboxState) {
+            element.type = "text";
+        } else {
+            element.type = "password";
+        }
     }
     const passwordChange = () => {
         const password_value = document.getElementById('password').value;
@@ -23,26 +19,16 @@ export default function RegisterPage() {
             document.querySelector('.password').classList.add('d-none');
         }
     }
-    const toggle_Password = (event) => {
-        const checkboxState = event.target.checked;
-        const element = document.querySelector('#password');
-        if (checkboxState) {
-            element.type = "text";
-        } else {
-            element.type = "password";
-        }
-    }
     return (
         <div className="loginContainer">
-            <h3 className='text-center'>SIGN UP</h3>
-            <form action="/api/register" className='was-validated' method='post'>
+            <h3 className='text-center'>Login</h3>
+            <form action="/api/login" className='was-validated' method='post'>
                 <div className="mb-3 mt-3 row">
                     <div className="col-2">
                         <label htmlFor="username" className="form-label">Username </label>
                     </div>
                     <div className="col-10">
-                        <input type="text" id="username" onChange={(event)=>check_username_is_exist(event)} name="username" value={username} required
-                               className="form-control"/>
+                        <input type="text" id="username" name="username" required className="form-control"/>
                     </div>
                     <div className='valid-feedback'>Valid</div>
                     <div className='invalid-feedback'>Please fill this field</div>
@@ -65,26 +51,15 @@ export default function RegisterPage() {
                         least 8 character including (1 lowercase,1 uppercase,1 digit) character
                     </div>
                 </div>
-                <div className="mb-3 row">
-                    <div className="col-2">
-                        <label htmlFor="email" className="form-label">Email </label>
-                    </div>
-                    <div className="col-10">
-                        <input type="email" id="email" required className="form-control" name="email"/>
-                    </div>
-                    <div className='valid-feedback'>Valid</div>
-                    <div className='invalid-feedback'>invalid email</div>
-                    <div className='alert alert-danger mt-2 d-none email'><strong>Error!</strong> The entered email is
-                        not valid
-                    </div>
-                </div>
                 <div className="form-check mb-3">
                     <label className="form-check-label">
                         <input className="form-check-input" type="checkbox"
-                               onChange={(event) => toggle_Password(event)}/> show password
+                               onChange={(event) => togglePassword(event)}/> show password
                     </label>
                 </div>
-                <button type="submit" className="btn btn-warning col-12">Register</button>
+                <button type="submit" className="btn btn-success col-12">LOG IN</button>
+                <p style={{textAlign: "center"}}>You don't have any account Register <Link
+                    to="/register" style={{cursor: "pointer", color: "red"}}>Here</Link></p>
             </form>
         </div>
     )

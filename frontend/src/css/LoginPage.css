@@ -1,0 +1,7 @@
+.loginContainer{
+    padding: 15px;
+    width: 50%;
+    margin: 25px auto;
+    background: url("../static/login.jpg") no-repeat fixed center;
+    background-size: cover;
+}

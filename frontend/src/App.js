@@ -1,8 +1,8 @@
-import { LoginPage } from "./LoginPage";
+import {HomePage} from './HomePage';
 
 function App() {
   return (
-    <><LoginPage/></>
+      <><h4>Hello</h4></>
   );
 }
 
