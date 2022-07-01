@@ -6,6 +6,9 @@ const cors = require('cors');
 const sort_products = require('./utils');
 const Seller = require('./seller.js');
 const dataBaseManagement = require('./db/dataBaseManagement.js')
+const authentication = require('./security/authentication.js');
+const signInPage = require('./security/signin.js');
+const signUpPage = require('./security/signup.js');
 
 const app = express();
 app.use(cors({origin: true, credentials: true}))
@@ -18,32 +21,14 @@ app.listen(3000, function () {
 
 
 dataBaseManagement.connectToDB();
+
+app.post("/api/login", signInPage);
+app.post("/api/register", signUpPage);
+
+app.use("/api/*", authentication.authenticate);
+
 app.post('/api/seller/product', Seller.AddProduct);
 
-
-app.post('/api/login', async function (req, res) {
-    let result;
-    await mongodb.check_user_exist('online-shop', 'users', req.body)
-        .then(res => result = res)
-        .catch(err => result = err);
-    console.log(result);
-    if (result.code === 200) {
-        res.status(200).json({'message': 'ok'});
-    } else {
-        res.status(400).json({'message': 'error'});
-    }
-});
-app.post('/api/register', async function (req, res) {
-    const body = req.body;
-    let result;
-    await mongodb.check_user_exist('online-shop', 'users', body)
-        .then(res => result = res)
-        .catch(err => result = err);
-    if (result.code === 404) {
-        mongodb.insert('online-shop', 'users', body);
-        res.status(200).json({'message': 'document inserted successfully'})
-    }
-});
 app.get('/username/:user', async function (req, res) {
     const username = req.params.user;
     let result;
