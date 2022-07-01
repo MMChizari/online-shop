@@ -4,6 +4,8 @@ const bodyparser = require('body-parser');
 const {get_docuemts_by_category, get_document_by_name, get_shops_by_productID, get_shops_by_product_name} = require("./mongodb");
 const cors = require('cors');
 const sort_products = require('./utils');
+const Seller = require('./seller.js');
+const dataBaseManagement = require('./db/dataBaseManagement.js')
 
 const app = express();
 app.use(cors({origin: true, credentials: true}))
@@ -13,6 +15,11 @@ app.use(bodyparser.urlencoded({extended: true}));
 app.listen(3000, function () {
     console.log('connected');
 });
+
+
+dataBaseManagement.connectToDB();
+app.post('/api/seller/product', Seller.AddProduct);
+
 
 app.post('/api/login', async function (req, res) {
     let result;
