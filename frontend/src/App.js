@@ -1,8 +1,8 @@
-import {HomePage} from './HomePage';
+import {ProductPage} from './ProductPage.js';
 
 function App() {
   return (
-      <><h4>Hello</h4></>
+      <><ProductPage/></>
   );
 }
 

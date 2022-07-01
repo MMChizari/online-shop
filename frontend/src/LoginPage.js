@@ -1,6 +1,8 @@
 import './css/LoginPage.css';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
+
 export default function LoginPage() {
+    const navigate = useNavigate();
     const togglePassword = (event) => {
         const checkboxState = event.target.checked;
         const element = document.querySelector('#password');
@@ -19,10 +21,28 @@ export default function LoginPage() {
             document.querySelector('.password').classList.add('d-none');
         }
     }
+    const submitAction = (event) => {
+        event.preventDefault();
+        const username_value = document.getElementById('username').value;
+        const password_value = document.getElementById('password').value;
+        const data = {username: username_value, password: password_value};
+        fetch('http://localhost:3000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.json())
+            .then(json=>{
+                if (json.message==="ok"){
+                    navigate('/home',{replace:true});
+                }
+            });
+    }
     return (
         <div className="loginContainer">
             <h3 className='text-center'>Login</h3>
-            <form action="/api/login" className='was-validated' method='post'>
+            <form onSubmit={(event) => submitAction(event)} action="/api/login" className='was-validated' method='post'>
                 <div className="mb-3 mt-3 row">
                     <div className="col-2">
                         <label htmlFor="username" className="form-label">Username </label>

@@ -6,13 +6,17 @@ import HomePage from "./HomePage";
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {Routes,Route} from 'react-router-dom';
+import ProductCard from "./ProductCard";
+import ProductPage from './ProductPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
       <Routes>
+          <Route path="/app" element={<ProductPage/>}/>
           <Route path="/" element={<LoginPage/>}/>
           <Route path="/register" element={<RegisterPage/>}/>
           <Route path="/home" element={<HomePage/>}/>
+          <Route path="/product/:product_name" element={<ProductPage/>}/>
       </Routes>
   </BrowserRouter>
 );

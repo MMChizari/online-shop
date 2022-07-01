@@ -1,14 +1,23 @@
+import {Link} from "react-router-dom";
+
 export default function ProductCard(props){
+    function add_to_list(){
+        const id = props.Product['_id'];
+        localStorage.setItem(props.Product.name,id);
+    }
     return(
-        <div className={"card"} style={{width:"300px"}}>
-            <img className={"card-img-top"} src={props.Product.url} alt={"product image"}/>
+        <div className="card" style={{width:"250px",margin:"10px"}}>
+            <img className={"card-img-top"} src={props.Product.url} height={"200px"} alt={`image ${props.Product.name}`}/>
             <div className={"card-body"}>
-                <h4>{props.Product.name}</h4>
+                <h4 style={{textAlign:"center"}}><Link
+                   style={{textDecoration:"none",color:"black"}} to={`/product/${props.Product.name}`}>{props.Product.name}</Link></h4>
                 <div className={"row"}>
-                    <i className={"col-6"}>{props.Product.category}</i>
-                    <i className={"col-6"}>{props.Product.price}</i>
+                    <i className={"col-6"}>Category: {props.Product.category}</i>
+                    <i className={"col-6"}>Price: {props.Product.price}$</i>
                 </div>
-                <a href={"#"} className={"btn btn-primary col-12"}>Add to Cart</a>
+                <div className={"row"}>
+                    <button onClick={add_to_list} className="btn btn-danger col-12">Like</button>
+                </div>
             </div>
         </div>
     )
