@@ -2,8 +2,21 @@ import {Link} from "react-router-dom";
 
 export default function ProductCard(props){
     function add_to_list(){
-        const id = props.Product['_id'];
-        localStorage.setItem(props.Product.name,id);
+        const product = props.Product;
+        const username = localStorage.getItem("username");
+        const data = {product:product,username:username};
+        fetch('http://localhost:3000/api/product/like',{
+            method: 'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response=>response.json())
+            .then(json=>{
+                if (json.message==='product added to favorite successfully'){
+                    console.log(json.message);
+                }
+            })
     }
     return(
         <div className="card" style={{width:"250px",margin:"10px"}}>

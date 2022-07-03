@@ -6,17 +6,25 @@ import HomePage from "./HomePage";
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {Routes,Route} from 'react-router-dom';
-import ProductCard from "./ProductCard";
 import ProductPage from './ProductPage';
+import FavoriteProducts from "./FavoriteProducts";
+import UserPage from "./UserPage";
+import ShopPage from "./ShopPage";
+import ReportPage from "./ReportPage";
+import AddProductPage from "./AddProductPage";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
       <Routes>
-          <Route path="/app" element={<ProductPage/>}/>
+          <Route path={"/add/product"} element={<AddProductPage/>}/>
+          <Route path={"/shop/add"} element={<ShopPage/>}/>
+          <Route path={"/seller/create"} element={<UserPage/>}/>
           <Route path="/" element={<LoginPage/>}/>
           <Route path="/register" element={<RegisterPage/>}/>
           <Route path="/home" element={<HomePage/>}/>
           <Route path="/product/:product_name" element={<ProductPage/>}/>
+          <Route path="/favorites" element={<FavoriteProducts/>}/>
+          <Route path="/report/:seller" element={<ReportPage/>}/>
       </Routes>
   </BrowserRouter>
 );

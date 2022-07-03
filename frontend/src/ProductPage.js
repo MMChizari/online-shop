@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import './css/ProductPage.css'
 import ShopInfo from "./ShopInfo";
 
 export default function ProductPage() {
+    const navigate = useNavigate();
     const {product_name} = useParams();
     const [shops, setShops] = useState([]);
     const [product, setProduct] = useState({});
-
     function getMaximumPrice(){
         let maximum = 0;
         for(let shop=0;shop<shops.length;shop++){
@@ -41,10 +41,13 @@ export default function ProductPage() {
             .then(response => setProduct(response.data.product));
     }
 
-    fetch_product_and_shops();
+    useEffect(()=>{
+        fetch_product_and_shops();
+    },[]);
+
     return (
         <div className={"container"}>
-            <div className="product-container">
+            <div className="product-container bg-white">
                 <div className="image">
                     <img src={product.url} height={"250px"} alt={product.name}/>
                 </div>
@@ -66,7 +69,7 @@ export default function ProductPage() {
                 </tr>
                 </thead>
                 <tbody>
-                    {shops.map(shop=><ShopInfo shopping={shop} product={product_name}/>)}
+                {shops.map(shop=><ShopInfo  shopping={shop} product={product_name}/>)}
                 </tbody>
             </table>
         </div>

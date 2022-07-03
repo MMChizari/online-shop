@@ -25,7 +25,7 @@ async function addProduct(req, res) {
     }
 
     //find product
-    const product = await ProductClass.findOne({
+    let product = await ProductClass.findOne({
       productName: productName,
     });
 
@@ -62,7 +62,7 @@ async function getSeller(req, res) {
       sellerName: sellerName,
     });
 
-    return res.status(200).send(seller).end();
+    return res.status(200).json({seller:seller});
   } catch (error) {
     return res.status(500).send(error.message).end();
   }
@@ -70,4 +70,5 @@ async function getSeller(req, res) {
 
 module.exports = {
   AddProduct: addProduct,
+  GetSeller: getSeller
 };
