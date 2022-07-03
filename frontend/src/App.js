@@ -1,8 +1,8 @@
-import { LoginPage } from "./LoginPage";
+import {ProductPage} from './ProductPage.js';
 
 function App() {
   return (
-    <><LoginPage/></>
+      <><ProductPage/></>
   );
 }
 

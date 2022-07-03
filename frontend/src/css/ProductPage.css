@@ -1,0 +1,24 @@
+*{
+    box-sizing: border-box;
+}
+.product-container{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid black;
+    padding: 5px;
+    width: 80%;
+    margin: 10px auto;
+}
+.product-details{
+    margin-left: 15px;
+}
+.badge{
+    color: white;
+    padding: 5px;
+}
+.category{
+    background-color: rgb(216, 63, 63);
+}
+.sub-category{
+    background-color: rgb(20, 99, 20);
+}
