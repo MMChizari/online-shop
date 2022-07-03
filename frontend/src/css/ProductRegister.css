@@ -1,0 +1,6 @@
+.form-background {
+    background: url("../static/form.gif"),url("../static/paper.gif");
+    background-position: right bottom, left top;
+    background-repeat: no-repeat, repeat;
+    color: #000;
+}

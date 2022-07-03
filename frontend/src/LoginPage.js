@@ -35,6 +35,7 @@ export default function LoginPage() {
         }).then(response => response.json())
             .then(json=>{
                 if (json.message==="ok"){
+                    localStorage.setItem("username",username_value);
                     navigate('/home',{replace:true});
                 }
             });
@@ -77,7 +78,8 @@ export default function LoginPage() {
                                onChange={(event) => togglePassword(event)}/> show password
                     </label>
                 </div>
-                <button type="submit" className="btn btn-success col-12">LOG IN</button>
+                <button type="submit" className="btn btn-success col-6">LOG IN</button>
+                <button type="submit" className="btn btn-danger col-6">Sign Out</button>
                 <p style={{textAlign: "center"}}>You don't have any account Register <Link
                     to="/register" style={{cursor: "pointer", color: "red"}}>Here</Link></p>
             </form>

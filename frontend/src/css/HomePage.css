@@ -1,4 +1,4 @@
-input[type=search]{
+input[type=search] {
     background-color: white;
     background-image: url('../static/searchicon.png');
     background-position: 10px 10px;
@@ -7,11 +7,13 @@ input[type=search]{
     width: 80%;
     margin: 20px;
 }
-.content{
+
+.content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 .sidenav {
     height: 100%;
     width: 200px;
@@ -33,7 +35,7 @@ input[type=search]{
     display: block;
     border: none;
     background: none;
-    width:100%;
+    width: 100%;
     text-align: left;
     cursor: pointer;
     outline: none;
@@ -69,8 +71,26 @@ input[type=search]{
     float: right;
     padding-right: 8px;
 }
-.products{
+
+.products {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.favorite {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+.te{
+    color: #ccb4b4;
 }
